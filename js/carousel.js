@@ -1,24 +1,30 @@
-
-
 //carousel
 
 //Array storage class
 let carouselArr = [];
 
-
 //class Carousel
 class Carousel {
 
-    
-      
-    static Start(arr){
-        if(arr){
+    constructor(image, title, url){
+        this.image = image;
+        this.title = title;
+        this.url = url; 
 
-            if(arr.length > 0){
-                Carousel._sequence = 0;
-                Carousel._size = arr.length;
-                Carousel.Next(); //start
-                Carousel._interval = setInterval(function(){ Carousel.Next(); },5000);
+        this._interval;   
+        this._sequence;   
+        this._size;   
+    }
+
+    static Start(arr){
+        if(typeof arr == "object" ){ 
+
+            if(arr.length > 0){ 
+                this._sequence = 0;
+                this._size = arr.length;
+                Carousel.Next(arr); //start
+                this._interval = setInterval(function(){ Carousel.Next(arr); },5000);
+                                        
             }
             
         } else {
@@ -26,7 +32,23 @@ class Carousel {
         }
     }
 
-    static Next(){
-        
+    static Next(arr){ 
+
+        if(Carousel._sequence<Carousel._size){
+            let CarouseObject = arr[Carousel._sequence]; 
+
+            let divCarouselmage = document.getElementById("carousel");
+            divCarouselmage.innerHTML = `<a href=${CarouseObject.url}><img src=${CarouseObject.image} width="60%"></a>`;
+
+            let divCarouselTitle = document.getElementById("carousel-title");
+            divCarouselTitle.innerHTML = `<a href=${CarouseObject.url}> ${CarouseObject.title} </a>`
+
+            Carousel._sequence += 1;
+            if(Carousel._sequence>=Carousel._size){
+                Carousel._sequence = 0;
+            }
+        }
     }
 };
+
+
