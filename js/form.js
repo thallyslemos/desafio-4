@@ -20,12 +20,11 @@ function Post(form) {
             form.elements.namedItem("telefone").value, 
             form.elements.namedItem("contato").value);
 
-  console.log(data);
+  console.log(data); //os dados coletados serão mostrados no console
 }
 
 function Enviar() {
     var nome = document.getElementById("nomeid");
-    console.log(nome);
 
     if (nome.value != "") {   
         alert('Obrigado sr(a) ' + nome.value + ' os seus dados foram encaminhados com sucesso');
